@@ -1,9 +1,10 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include <stdarg.h> // Para usar va_list
+#include <stdarg.h>
 
 int _printf(const char *format, ...);
+void handle_format(char spec, va_list args, int *count);
 
 #endif /* MAIN_H */
 
