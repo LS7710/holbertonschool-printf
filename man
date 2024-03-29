@@ -1,0 +1,57 @@
+.PRINTF(3)          Library Functions Manual          .PRINTF(3)
+
+NAME
+     _printf - A simpler, custom made, version of the printf function created from scratch
+
+SYNOPSIS
+     #include <stdarg.h>
+     #include <stdio.h>
+
+     void _printf(const char *format, ...);
+
+DESCRIPTION
+     The _printf function is a custom implementation of the standard printf
+     function for formatted output. It writes output to stdout, the standard
+     output stream. This function interprets its format parameter as a format
+     string according to the following conversion specifiers:
+
+     %c      A single character is expected. The corresponding argument must be
+             of type int, which is converted to an unsigned char.
+
+     %s      A string is expected. The corresponding argument must be a pointer
+             to char (char *), which is output as a string.
+
+     %%      A '%' character is output. No argument is converted.
+
+     Other characters are output as-is.
+
+     The format string is read from left to right. Characters from format are
+     written to standard output (stdout) as they are encountered unless they are
+     format specifiers, which are interpreted as described above.
+
+RETURN VALUES
+     The _printf function does not return a value.
+
+EXAMPLES
+     The following code uses _printf to output formatted data:
+
+           _printf("Char: %c, String: %s\n", 'A', "Test");
+
+SEE ALSO
+     printf(3), fprintf(3), sprintf(3), snprintf(3), vprintf(3)
+
+STANDARDS
+     The _printf function is compliant with the C Standard, following the
+     behavior of the ISO C90 standard for the supported format specifiers.
+
+BUGS
+     This implementation of _printf does not fully support all the features
+     and format specifiers of the standard printf function. Behavior is
+     undefined if format specifiers other than %c, %s, and %% are used.
+
+AUTHORS
+     Xavier Cruz
+     Luis Soto
+
+.Printf 3.0         29 March 2024
+
