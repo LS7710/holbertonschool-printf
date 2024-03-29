@@ -12,6 +12,7 @@ int _printf(const char *format, ...)
         int i;
         int count = 0; /* Counter for the number of characters printed */
         va_list args; /* Variable argument list to handle multiple inputs */
+	ssize_t write_res = 0;
 
         va_start(args, format); /* Initialize the variable argument list */
 
@@ -23,11 +24,15 @@ int _printf(const char *format, ...)
                 if (format[i] == '%') /* Check for format specifier */
                 {
                         i++; /* Assume the next character is a valid specifier */
-                        process_specifier(format[i], args, &count); /* Calls function */
+			if (format[i] == '\0') /* Managed specifier format incomplete */
+				return (-1);
+			process_specifier(format[i], args, &count); /* Calls function */
                 }
                 else
                 {
-                        write(1, &format[i], 1); /* Write the current character to stdout */
+                        write_res = write(1, &format[i], 1); /* Write the current character to stdout */
+			if (write_res == -1) /* Verify errors in write */
+				return (-1);
                         count++;
                 }
         }

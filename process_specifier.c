@@ -18,7 +18,10 @@ void process_specifier(char specifier, va_list args, int *count)
         case 'i':
                 print_integer(va_arg(args, int), count);
                 break;
-        /* Handle default case if needed */
+	default: /* Managed unknown specifiers*/
+		write(1, &specifier, 1);
+		(*count)++;
+    		break;
         }
 }
 
