@@ -1,38 +1,35 @@
-#include <stdarg.h>
-#include <stdio.h>
+#include "main.h"
 
 /**
- * _printf - a custom version of the printf function
- * @format: format string
+ * _printf - Custom implementation of the printf function.
+ * @format: The format string that specifies the function's output.
  *
- * Return: void
+ * Return: The number of characters printed.
  */
-void _printf(const char *format, ...)
+int _printf(const char *format, ...)
 {
+    int count = 0;
     va_list args;
     va_start(args, format);
-    while (*format)
-    {
-        if (*format == '%')
-        {
-            format++;
-            switch (*format)
-            {
-                case 'c': putchar(va_arg(args, int)); break;
-                case 's': puts(va_arg(args, char*)); break;
-                case '%': putchar('%'); break;
-            }
-        }
-        else
-            putchar(*format);
-        format++;
-    }
-    va_end(args);
-}
 
-int func(void)
-{
-    _printf("Char: %c, String: %s%%\n", 'A', "Test");
-    return (0);
+    for (int i = 0; format && format[i]; i++) {
+        if (format[i] == '%' && format[i + 1]) {
+            i++; // Skip the '%'
+            switch (format[i]) {
+                case 'c': count += print_char(args); break;
+                case 's': count += print_string(args); break;
+                case '%': count += print_percent(); break;
+                case 'd':
+                case 'i': count += print_int(args); break;
+                default: write(1, &format[i], 1); count++; break;
+            }
+        } else {
+            write(1, &format[i], 1);
+            count++;
+        }
+    }
+
+    va_end(args);
+    return count;
 }
 
