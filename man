@@ -1,0 +1,53 @@
+PRINTF(3)                    Custom Standard Library Functions                    PRINTF(3)
+
+NAME
+    _printf - custom printf function to format and print data
+
+SYNOPSIS
+    #include "main.h"
+
+    int _printf(const char *format, ...);
+
+DESCRIPTION
+    The _printf function is a custom implementation of the standard printf function found
+    in C's standard library. It formats and prints its arguments under the control of the
+    format string that specifies how subsequent arguments (or arguments accessed via the
+    variable-length argument facilities of stdarg(3)) are converted for output.
+
+    The function can handle multiple input arguments dynamically, allowing for a variety
+    of data types to be formatted and printed. It utilizes format specifiers similar to
+    those in the standard printf function, such as %s for strings, %d for integers, etc.
+
+    Note: The actual handling and implementation of format specifiers are managed by the
+    process_specifier function, which is not detailed in this documentation.
+
+PARAMETERS
+    format - The format string contains text to be printed and format specifiers, which
+    describe how subsequent arguments are displayed.
+
+RETURN VALUES
+    _printf returns the number of characters printed (excluding the null byte used to end
+    output to strings).
+
+    Returns -1 on error, including if the format string is NULL or if a writing error occurs.
+
+EXAMPLES
+    Print a simple string:
+        _printf("Hello, World!\n");
+
+    Print an integer:
+        _printf("This is an integer: %d\n", 42);
+
+SEE ALSO
+    printf(3), write(2), stdarg(3)
+
+AUTHORS
+    Written by 
+	Xavier Cruz
+	Luis Soto
+
+BUGS
+    The current implementation does not fully support all standard printf format specifiers.
+    For a complete implementation, refer to the standard printf function.
+
+
