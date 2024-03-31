@@ -2,15 +2,15 @@
 #include <unistd.h>
 
 /**
- * _printf - Custom printf function to format and print data
- * @format: The format string containing directives
- * Return: Number of characters printed
- *
- * Description: This function mimics the standard printf function.
- */
+* _printf - Custom printf function to format and print data
+* @format: The format string containing directives
+* Return: Number of characters printed
+*
+* Description: This function mimics the standard printf function.
+*/
 int _printf(const char *format, ...)
 {
-	int i;
+	int i = 0;
 	int count = 0; /* Counter for the number of characters printed */
 	va_list args; /* Variable argument list to handle multiple inputs */
 	ssize_t write_res = 0;
@@ -20,7 +20,7 @@ int _printf(const char *format, ...)
 	if (!format) /* Check if the format string is NULL */
 		return (-1); /* Return -1 to indicate an error */
 
-	for (i = 0; format[i] != '\0'; i++) /* Main loop through the format string */
+	while (format[i] != '\0') /* Main loop through the format string */
 	{
 		if (format[i] == '%') /* Check for format specifier */
 		{
@@ -37,6 +37,7 @@ int _printf(const char *format, ...)
 				return (-1);
 			count++;
 		}
+		i++;
 	}
 
 	va_end(args); /* Clean up the variable argument list */
