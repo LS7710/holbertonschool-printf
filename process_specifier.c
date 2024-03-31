@@ -31,7 +31,8 @@ void process_specifier(char specifier, va_list args, int *count)
 		print_integer(va_arg(args, int), count);
 		break;
 	default: /* Handle unknown specifiers */
-		print_char(specifier, count);
+		print_char('%', count); /* Print the percentage sign first */
+		print_char(specifier, count); /* Then print the unknown specifier */
 		break;
 	}
 }
