@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdarg.h>
 #include <stdio.h>
+
 /**
  * print_integer - Recursively prints an integer character by character
  * @n: The integer to print
@@ -11,6 +12,8 @@
  */
 int print_integer(int n) {
     int count = 0;
+    char digit;
+
     if (n < 0) {
         if (n == INT_MIN) {
             count += write(1, "-", 1);
@@ -24,7 +27,8 @@ int print_integer(int n) {
     if (n / 10) {
         count += print_integer(n / 10);
     }
-    char digit = '0' + (n % 10);
+    
+    digit = '0' + (n % 10);
     count += write(1, &digit, 1);
     return count;
 }

@@ -10,16 +10,17 @@
 int print_string(va_list args) {
     char *str = va_arg(args, char *);
     int count = 0;
+    int i;
 
-    // Handle null string by printing "(null)" as printf does.
     if (str == NULL) {
         str = "(null)";
     }
 
-    // Iterate through the string and write each character.
-    for (int i = 0; str[i] != '\0'; i++) {
+    i = 0;
+    while (str[i] != '\0') {
         write(1, &str[i], 1);
         count++;
+        i++;
     }
 
     return count;
